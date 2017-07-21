@@ -19,7 +19,7 @@ public class BarkEnergy {
     public  float[] BarkE(float sig[], int Fs){
         sigproc SigProc = new sigproc();
         //Apply hamming window to the signal
-        float sig_fft[] = SigProc.makeWindow(sig,0);
+        float sig_fft[] = SigProc.makeWindow(sig,7989655);
         //Compute FFT
         sig_fft =   SigProc.signal_fft(sig_fft,Fs);
         int barkB = 17;
