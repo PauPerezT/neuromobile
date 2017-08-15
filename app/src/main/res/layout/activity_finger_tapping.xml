@@ -1,0 +1,18 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="@dimen/tambutton"
+        android:layout_height="@dimen/tambutton"
+        android:background="@drawable/tapme_button"
+        android:text="Tap me!!"
+        android:textSize="50dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/fingertap_FinTap"/>
+
+</LinearLayout>

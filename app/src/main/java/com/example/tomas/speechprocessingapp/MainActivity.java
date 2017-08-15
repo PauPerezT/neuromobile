@@ -63,11 +63,20 @@ public class MainActivity extends AppCompatActivity{
 
         //Chronometer
         rectimer = (Chronometer) findViewById(R.id.chrono);
+
+
+
     }
 
     public  void RecList(View view){
         Intent intent = new Intent(this, RecordingsList.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"WAV");
+        startActivity(intent);
+    }
+
+    public  void FinTap(View view){
+        Intent intent = new Intent(this, FingerTapping.class);
+        //intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"WAV");
         startActivity(intent);
     }
 
