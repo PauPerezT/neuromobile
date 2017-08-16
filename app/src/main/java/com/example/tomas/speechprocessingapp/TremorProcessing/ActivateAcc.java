@@ -103,7 +103,7 @@ public class ActivateAcc  extends Thread implements SensorEventListener {
         Date date = new Date();
         //String format = simpleDateFormat.format(date);
         format = simpleDateFormat.format(date);
-        f = new File(pathData + File.separator + "ACC", "testRecord" + format + ".txt");
+        f = new File(pathData + File.separator + "ACC", "ACC_" + format + ".txt");
         try {
         fout = new OutputStreamWriter(new FileOutputStream(f));
         } catch (Exception e) {

@@ -23,7 +23,6 @@ import com.example.tomas.speechprocessingapp.TremorProcessing.ActivateAcc;
 import java.io.File;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
-import static java.util.Arrays.copyOfRange;
 
 public class MainActivity extends AppCompatActivity{
     private boolean recflag = false;
@@ -53,6 +52,10 @@ public class MainActivity extends AppCompatActivity{
             datafolder.mkdirs();
             datafolder = new File(pathData + File.separator + "ACC");//Folder to save data form acceler
             datafolder.mkdirs();
+            datafolder = new File(pathData + File.separator + "TAPR");//Folder to save data from fingertapping
+            datafolder.mkdirs();
+            datafolder = new File(pathData + File.separator + "TAPL");//Folder to save data from fingertapping
+            datafolder.mkdirs();
         }
 
 
@@ -74,9 +77,15 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public  void FinTap(View view){
+    public  void FinTapR(View view){
         Intent intent = new Intent(this, FingerTapping.class);
-        //intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"WAV");
+        intent.putExtra(EXTRA_MESSAGE, pathData + File.separator + "TAPR");
+        startActivity(intent);
+    }
+
+    public  void FinTapL(View view){
+        Intent intent = new Intent(this, FingerTapping.class);
+        intent.putExtra(EXTRA_MESSAGE, pathData + File.separator + "TAPL");
         startActivity(intent);
     }
 

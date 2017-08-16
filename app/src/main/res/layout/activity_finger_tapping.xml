@@ -6,6 +6,13 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/fingertap_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:textSize="70dp"/>
+
     <Button
         android:layout_width="@dimen/tambutton"
         android:layout_height="@dimen/tambutton"
