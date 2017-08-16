@@ -35,13 +35,14 @@ public class FingerTapping extends AppCompatActivity {
 
         //Save folder
         TAPpath = intent.getStringExtra(AlarmClock.EXTRA_MESSAGE);
+        String fname = intent.getStringExtra("Button");
 
         Date date = new Date();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyyhhmmss");
         //String format = simpleDateFormat.format(date);
         format = simpleDateFormat.format(date);
-        f = new File(TAPpath, "FingerTap_" +format + ".txt");
+        f = new File(TAPpath, fname+format + ".txt");
         try {
             fout = new OutputStreamWriter(new FileOutputStream(f));
         } catch (Exception e) {
@@ -50,20 +51,23 @@ public class FingerTapping extends AppCompatActivity {
 
          timer = (TextView)findViewById(R.id.fingertap_timer);
 
-        new CountDownTimer(16000, 1000) {
-
+        new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
-                timer.setText(String.valueOf(millisUntilFinished / 1000));
+                timer.setText(String.valueOf((millisUntilFinished / 1000)-1));
+                if (String.valueOf((millisUntilFinished / 1000)-1)=="0")
+                {
+                    timer.setText("Stop");
+                }
             }
-
             public void onFinish() {
                 try {
                     fout.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                SystemClock.sleep(500);
                 finish();//close current activity
-                //timer.setText("0");
+                //timer.setText("0");;
             }
         }.start();
 

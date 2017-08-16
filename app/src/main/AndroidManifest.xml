@@ -36,9 +36,11 @@
         <activity
             android:name=".DisplayResults"
             android:screenOrientation="portrait" />
-        <activity android:name=".FingerTapping"
-            android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".FingerTapping"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Timer"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

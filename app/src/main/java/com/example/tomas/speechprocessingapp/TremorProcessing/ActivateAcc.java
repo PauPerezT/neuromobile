@@ -16,6 +16,13 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+import com.example.tomas.speechprocessingapp.R;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import android.graphics.Color;
 /**
  * Created by TOMAS on 20/04/2017.
  */
@@ -31,6 +38,8 @@ public class ActivateAcc  extends Thread implements SensorEventListener {
     private File f;
     private OutputStreamWriter fout;
     private double[] gravity = {0,0,0};
+    private LineGraphSeries<DataPoint> mSeries1, mSeries2, mSeries3;
+    private double graph1LastXValue = 0d;
 
     //private Context context;
 
@@ -94,7 +103,7 @@ public class ActivateAcc  extends Thread implements SensorEventListener {
 
     }
 
-    public  void startAcc(String pathData)
+    public  void startAcc(String pathData,String fname)
     {
         this.pathData = pathData;
         //this.format = format;
@@ -103,7 +112,7 @@ public class ActivateAcc  extends Thread implements SensorEventListener {
         Date date = new Date();
         //String format = simpleDateFormat.format(date);
         format = simpleDateFormat.format(date);
-        f = new File(pathData + File.separator + "ACC", "ACC_" + format + ".txt");
+        f = new File(pathData, fname + format + ".txt");
         try {
         fout = new OutputStreamWriter(new FileOutputStream(f));
         } catch (Exception e) {

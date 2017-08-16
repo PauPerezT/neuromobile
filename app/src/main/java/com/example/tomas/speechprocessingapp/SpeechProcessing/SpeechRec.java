@@ -59,8 +59,8 @@ public class SpeechRec extends Thread{
             Date date = new Date();
             //String format = simpleDateFormat.format(date);
             String format = simpleDateFormat.format(date);
-            File filePcm = new File(pathData + File.separator +"testRecord" + format + ".pcm");
-            File fileWav = new File(pathData + File.separator + "WAV" + File.separator +"testRecord" + format + ".wav");
+            File filePcm = new File(pathData + File.separator +"Speech_" + format + ".pcm");
+            File fileWav = new File(pathData + File.separator + "WAV" + File.separator +"Speech_" + format + ".wav");
             //dataouputStream is the audio signal converted to bytes
 
         try {
