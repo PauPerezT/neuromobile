@@ -72,29 +72,50 @@ public class MainActivity extends AppCompatActivity{
         rectimer = (Chronometer) findViewById(R.id.chrono);
         rectimergait = (Chronometer) findViewById(R.id.chronogait);
         //tasktext = (TextView)findViewById(R.id.Timer_text);
-           }
 
-    public  void RecList(View view){
-        Intent intent = new Intent(this, RecordingsList.class);
-        intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"WAV");
-        startActivity(intent);
+        Button bt_listrec = (Button) findViewById(R.id.main_listrec);
+        bt_listrec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RecordingsList.class);
+                intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"WAV");
+                startActivity(intent);
+            }
+        });
+
+        Button bt_speechrec = (Button) findViewById(R.id.main_speechrec);
+        bt_speechrec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Startrec();
+            }
+        });
+
+        Button bt_restTremorL = (Button) findViewById(R.id.main_resttremorL);
+        bt_restTremorL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                restTremor(ID_text.getText().toString(),"Left");
+            }
+        });
+
+        Button bt_restTremorR = (Button) findViewById(R.id.main_resttremorR);
+        bt_restTremorR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                restTremor(ID_text.getText().toString(),"Right");
+            }
+        });
     }
 
-    public void RestTremorL(View view)
-    {
-        //tasktext.setText("Resting Left");
-        Intent intent = new Intent(this,Timer.class);
-        intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "RestTremorLeft");
-        startActivity(intent);
-    }
 
-    public void RestTremorR(View view)
+    private void restTremor(String userID, String side)
     {
-        //tasktext.setText("Resting Right");
+        if( !userID.equals("") ) userID+="_";
+
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "RestTremorRight");
+        intent.putExtra("Button", userID+"RestTremor"+side);
         startActivity(intent);
     }
 
@@ -202,10 +223,10 @@ public class MainActivity extends AppCompatActivity{
     }
 */
     //Start recording when the "Record" button is clicked
-    public void Startrec(View view) {
+    private void Startrec() {
         //Request permissions to record and audio files
         int record_perm = RequestPermissions();
-        Button pb = (Button) findViewById(R.id.rec);
+        Button pb = (Button) findViewById(R.id.main_speechrec);
         rectimer.setBase(SystemClock.elapsedRealtime());
         if (record_perm == PackageManager.PERMISSION_GRANTED) {
 
@@ -262,41 +283,3 @@ public class MainActivity extends AppCompatActivity{
     }//END REQUEST PERMISSION
 
 }
-
-/*
-
-    <LinearLayout
-        android:id="@+id/optionlayout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-    <TextView
-        android:id="@+id/record_message"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Data to capture"
-        android:textSize="20dp"/>
-
-        <CheckBox
-            android:id="@+id/checkbox_motion"
-            android:gravity="center"
-            android:checked="true"
-            android:text="Motion"
-            android:textSize="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked"
-            />
-        <CheckBox
-            android:id="@+id/checkbox_speech"
-            android:checked="true"
-            android:gravity="center"
-            android:text="Speech"
-            android:textSize="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked"
-            />
-    </LinearLayout>
-* */
