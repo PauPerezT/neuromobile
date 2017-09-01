@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity{
     private boolean gaitflag = false;
     String pathData = null;
     private Chronometer rectimer,rectimergait= null;
+    private EditText ID_text=null;
     private int facc=1,fspee = 1;
     private SensorManager mSensorManager;
     public ActivateAcc acc;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity{
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //acc = new SetAcc(this);
         acc =  new ActivateAcc(this,mSensorManager);
+        ID_text  = (EditText)findViewById(R.id.main_subjectID);
 
         //Chronometer
         rectimer = (Chronometer) findViewById(R.id.chrono);
