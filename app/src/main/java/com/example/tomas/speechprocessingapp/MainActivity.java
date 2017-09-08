@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tomas.speechprocessingapp.SpeechProcessing.SpeechRec;
+import com.example.tomas.speechprocessingapp.TremorProcessing.AccGraph;
 import com.example.tomas.speechprocessingapp.TremorProcessing.ActivateAcc;
 
 import java.io.File;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
         pathData = Environment.getExternalStorageDirectory() + File.separator + "AppSpeechData";
         File datafolder = new File(pathData);
         boolean checkF = datafolder.exists();
-        if (checkF == false) {
+        //if (checkF == false) {
             datafolder.mkdirs();
             datafolder = new File(pathData + File.separator + "WAV");
             datafolder.mkdirs();
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
             datafolder.mkdirs();
             datafolder = new File(pathData + File.separator + "TAP");//Folder to save data from fingertapping
             datafolder.mkdirs();
-        }
+        //}
 
 
         // Get an instance of the SensorManager. ACCELEROMETER
@@ -91,6 +92,23 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        Button bt_TremorL = (Button) findViewById(R.id.main_tremorL);
+        bt_TremorL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tremor(ID_text.getText().toString(),"Left");
+
+            }
+        });
+
+        Button bt_TremorR = (Button) findViewById(R.id.main_tremorR);
+        bt_TremorR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tremor(ID_text.getText().toString(),"Right");
+            }
+        });
+
         Button bt_restTremorL = (Button) findViewById(R.id.main_resttremorL);
         bt_restTremorL.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +124,115 @@ public class MainActivity extends AppCompatActivity{
                 restTremor(ID_text.getText().toString(),"Right");
             }
         });
+
+        Button bt_kintremorL = (Button) findViewById(R.id.main_kintremorL);
+        bt_kintremorL.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                KinTremor(ID_text.getText().toString(),"Left");
+            }
+        });
+
+        Button bt_kintremorR = (Button) findViewById(R.id.main_kintremorR);
+        bt_kintremorR.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                KinTremor(ID_text.getText().toString(),"Right");
+            }
+        });
+
+        Button bt_pronL = (Button) findViewById(R.id.main_pronL);
+        bt_pronL.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                Prona(ID_text.getText().toString(),"Left");
+            }
+        });
+
+        Button bt_pronR = (Button) findViewById(R.id.main_pronR);
+        bt_pronR.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                Prona(ID_text.getText().toString(),"Right");
+            }
+        });
+
+        Button bt_tapL = (Button) findViewById(R.id.main_tapL);
+        bt_tapL.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                FinTap(ID_text.getText().toString(),"Left");
+            }
+        });
+
+        Button bt_tapR = (Button) findViewById(R.id.main_tapR);
+        bt_tapR.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                FinTap(ID_text.getText().toString(),"Right");
+            }
+        });
+
+        Button bt_kin2L = (Button) findViewById(R.id.main_kintremor2L);
+        bt_kin2L.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                KinTremor2(ID_text.getText().toString(),"Left");
+            }
+        });
+
+        Button bt_kin2R = (Button) findViewById(R.id.main_kintremor2R);
+        bt_kin2R.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                KinTremor2(ID_text.getText().toString(),"Right");
+            }
+        });
+
+        Button bt_gait = (Button) findViewById(R.id.main_gait);
+        bt_gait.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+               Gait(ID_text.getText().toString());
+            }
+        });
+        Button bt_rigL = (Button) findViewById(R.id.main_rigidityL);
+        bt_rigL.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                Rigidity(ID_text.getText().toString(),"Left");
+            }
+        });
+        Button bt_rigR = (Button) findViewById(R.id.main_rigidityR);
+        bt_rigR.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void  onClick(View view){
+                Rigidity(ID_text.getText().toString(),"Right");
+            }
+        });
     }
 
+
+    private void Tremor(String userID, String side)
+    {
+        if( !userID.equals("") ) userID+="_";
+
+        Intent intent = new Intent(this,Timer.class);
+        intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
+        intent.putExtra("Button", userID+"Tremor"+side);
+        startActivity(intent);
+    }
 
     private void restTremor(String userID, String side)
     {
@@ -119,81 +244,69 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public void KinTremorL(View view)
+    private void KinTremor(String userID, String side)
     {
+        if( !userID.equals("") ) userID+="_";
         //tasktext.setText("Kinetic Left");
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "KinTremorLeft");
+        intent.putExtra("Button", userID+"KinTremor"+side);
         startActivity(intent);
     }
 
-    public void KinTremorR(View view)
+   private void Prona(String userID, String side)
     {
-        //tasktext.setText("Kinetic Right");
-        Intent intent = new Intent(this,Timer.class);
-        intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "KinTremorRight");
-        startActivity(intent);
-    }
-
-    public void PronaL(View view)
-    {
+        if( !userID.equals("") ) userID+="_";
         //tasktext.setText("Pronation Left");
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "PronSupiLeft");
+        intent.putExtra("Button", userID+"PronSupi"+side);
         startActivity(intent);
     }
 
-    public void PronaR(View view)
+    private void KinTremor2(String userID, String side)
     {
-        //tasktext.setText("Pronation Right");
-        Intent intent = new Intent(this,Timer.class);
-        intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "PronSupiRight");
-        startActivity(intent);
-    }
-    public void RigL(View view)
-    {
+        if( !userID.equals("") ) userID+="_";
         //tasktext.setText("Rigidity Left");
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "RigidityLeft");
+        intent.putExtra("Button", userID+"KinTremor2"+side);
         startActivity(intent);
     }
 
-    public void RigR(View view)
+
+    private  void FinTap(String userID, String side)
     {
-        //tasktext.setText("Rigidity Right");
-        Intent intent = new Intent(this,Timer.class);
-        intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
-        intent.putExtra("Button", "RigidityRight");
-        startActivity(intent);
-    }
-
-    public  void FinTapR(View view){
+        if( !userID.equals("") ) userID+="_";
         Intent intent = new Intent(this, FingerTapping.class);
         intent.putExtra(EXTRA_MESSAGE, pathData + File.separator + "TAP");
-        intent.putExtra("Button", "FingerTapRight");
+        intent.putExtra("Button", userID+"FingerTap"+side);
+        startActivity(intent);
+    }
+    private  void Rigidity(String userID, String side)
+    {
+        if( !userID.equals("") ) userID+="_";
+        Intent intent = new Intent(this, Timer.class);
+        intent.putExtra(EXTRA_MESSAGE, pathData + File.separator + "ACC");
+        intent.putExtra("Button", userID+"Rigidity"+side);
         startActivity(intent);
     }
 
-    public  void FinTapL(View view){
-        Intent intent = new Intent(this, FingerTapping.class);
-        intent.putExtra(EXTRA_MESSAGE, pathData + File.separator + "TAP");
-        intent.putExtra("Button", "FingerTapLeft");
+    private void Gait(String userID){
+        if( !userID.equals("") ) userID+="_";
+        Intent intent = new Intent(this,AccGraph.class);
+        intent.putExtra("Path", pathData + File.separator + "ACC");
+        intent.putExtra("Task", userID+"Gait");
         startActivity(intent);
-    }
-
-    public void Gait(View view){
+       /*
+        if( !userID.equals("") ) userID+="_";
         Button pb = (Button) findViewById(R.id.main_gait);
         rectimergait.setBase(SystemClock.elapsedRealtime());
         gaitflag = !gaitflag;
         if (gaitflag) {
             pb.setText("Stop");
             rectimergait.start();
-            acc.startAcc(pathData+File.separator+"ACC","Gait");
+            acc.startAcc(pathData+File.separator+"ACC",userID+"Gait");
 
 
         } else {
@@ -203,6 +316,7 @@ public class MainActivity extends AppCompatActivity{
                 acc.stopAcc();
 
         }
+        */
     }
 /*
     public void onCheckboxClicked(View view) {
