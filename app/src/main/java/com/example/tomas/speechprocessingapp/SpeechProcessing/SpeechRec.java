@@ -57,7 +57,6 @@ public class SpeechRec extends Thread{
     private void startSpeechRecording() {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyyhhmmss");
             Date date = new Date();
-            //String format = simpleDateFormat.format(date);
             String format = simpleDateFormat.format(date);
             File filePcm = new File(pathData + File.separator +"Speech_" + format + ".pcm");
             File fileWav = new File(pathData + File.separator + "WAV" + File.separator +"Speech_" + format + ".wav");

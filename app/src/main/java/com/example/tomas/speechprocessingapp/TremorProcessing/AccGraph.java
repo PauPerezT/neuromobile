@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import com.example.tomas.speechprocessingapp.R;
 import com.jjoe64.graphview.GraphView;
@@ -31,7 +32,6 @@ public class AccGraph extends AppCompatActivity implements SensorEventListener{
     private boolean accflag = false;
     private Sensor mAcc;
     private double[] linear_acceleration = new double[3];
-    private String data_sensors="";
     private SensorManager mSensorManager;
     private String pathData,fname;
     private String format;
@@ -50,13 +50,31 @@ public class AccGraph extends AppCompatActivity implements SensorEventListener{
         setContentView(R.layout.activity_acc_graph);
 
         Intent intent = getIntent();
-        final String path = intent.getStringExtra("Path");
-        final String fname = intent.getStringExtra("Task");
+        final String path = intent.getStringExtra("Path");//Path to store data
+        String userID = intent.getStringExtra("ID");//Subject ID
+        final String tname = intent.getStringExtra("Task");//Task name
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd");
+        Date date = new Date();
+        String format = simpleDateFormat.format(date);
+
+        if( userID.equals("") )
+        {
+            userID = format;
+        }
+
 
         this.pathData = path;
-        this.fname = fname;
+        this.fname = userID+"_"+tname;
         //this.format = format;
 
+        //Set text for ID
+        TextView idtext = (TextView) findViewById(R.id.accgraph_id);
+        idtext.setText(userID);
+        //Set text for Task
+        TextView tasktext = (TextView) findViewById(R.id.accgraph_task);
+        tasktext.setText(tname);
 
         //super(context);
         //this.mSensorManager = mSensorManager;
@@ -64,12 +82,12 @@ public class AccGraph extends AppCompatActivity implements SensorEventListener{
         mAcc = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         //Chrono
-        rectimer = (Chronometer) findViewById(R.id.acc_chrono);
+        rectimer = (Chronometer) findViewById(R.id.accgraph_chrono);
 
         //Graph
-        graph = (GraphView) findViewById(R.id.acc_graph);
+        graph = (GraphView) findViewById(R.id.accgraph_graph);
 
-        Button bt_start_acc = (Button) findViewById(R.id.acc_start);
+        Button bt_start_acc = (Button) findViewById(R.id.accgraph_start);
         bt_start_acc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -132,7 +150,7 @@ public class AccGraph extends AppCompatActivity implements SensorEventListener{
         graph.addSeries(mSeries2);
         graph.addSeries(mSeries3);
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0);
+        //graph.getViewport().setMinX(0);
         graph.getViewport().setMinX(graph1LastXValue - size_axis);
 
         //Text file
@@ -162,6 +180,7 @@ public class AccGraph extends AppCompatActivity implements SensorEventListener{
         }
     }
     private void init_plot() {
+        //graph1LastXValue = 0d;
         mSeries1 = new LineGraphSeries<>();
         mSeries2 = new LineGraphSeries<>();
         mSeries3 = new LineGraphSeries<>();
@@ -174,7 +193,7 @@ public class AccGraph extends AppCompatActivity implements SensorEventListener{
     }
 
         private void capturedata() {
-        Button pb = (Button) findViewById(R.id.acc_start);
+        Button pb = (Button) findViewById(R.id.accgraph_start);
         rectimer.setBase(SystemClock.elapsedRealtime());
         accflag = !accflag;
         if (accflag) {

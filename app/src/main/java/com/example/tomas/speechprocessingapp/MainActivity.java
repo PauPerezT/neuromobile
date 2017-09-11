@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity{
     private boolean recflag = false;
     private boolean gaitflag = false;
     String pathData = null;
-    private Chronometer rectimer,rectimergait= null;
+    private Chronometer rectimer= null;
     private EditText ID_text=null;
     private int facc=1,fspee = 1;
     private SensorManager mSensorManager;
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity{
 
         //Chronometer
         rectimer = (Chronometer) findViewById(R.id.chrono);
-        rectimergait = (Chronometer) findViewById(R.id.chronogait);
         //tasktext = (TextView)findViewById(R.id.Timer_text);
 
         Button bt_listrec = (Button) findViewById(R.id.main_listrec);
@@ -226,52 +225,86 @@ public class MainActivity extends AppCompatActivity{
 
     private void Tremor(String userID, String side)
     {
+        Intent intent = new Intent(this,AccGraph.class);
+        intent.putExtra("Path", pathData + File.separator + "ACC");
+        intent.putExtra("ID",userID);
+        intent.putExtra("Task","PosturalTremor"+side);
+        startActivity(intent);
+        /*
         if( !userID.equals("") ) userID+="_";
 
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
         intent.putExtra("Button", userID+"Tremor"+side);
         startActivity(intent);
+        */
     }
 
     private void restTremor(String userID, String side)
     {
+        Intent intent = new Intent(this,AccGraph.class);
+        intent.putExtra("Path", pathData + File.separator + "ACC");
+        intent.putExtra("ID",userID);
+        intent.putExtra("Task","RestTremor"+side);
+        startActivity(intent);
+        /*
         if( !userID.equals("") ) userID+="_";
 
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
         intent.putExtra("Button", userID+"RestTremor"+side);
         startActivity(intent);
+        */
     }
 
     private void KinTremor(String userID, String side)
     {
+        Intent intent = new Intent(this,AccGraph.class);
+        intent.putExtra("Path", pathData + File.separator + "ACC");
+        intent.putExtra("ID",userID);
+        intent.putExtra("Task","KinTremor"+side);
+        startActivity(intent);
+        /*
         if( !userID.equals("") ) userID+="_";
         //tasktext.setText("Kinetic Left");
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
         intent.putExtra("Button", userID+"KinTremor"+side);
         startActivity(intent);
+        */
     }
 
    private void Prona(String userID, String side)
     {
+        Intent intent = new Intent(this,AccGraph.class);
+        intent.putExtra("Path", pathData + File.separator + "ACC");
+        intent.putExtra("ID",userID);
+        intent.putExtra("Task","PronSupi"+side);
+        startActivity(intent);
+        /*
         if( !userID.equals("") ) userID+="_";
         //tasktext.setText("Pronation Left");
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
         intent.putExtra("Button", userID+"PronSupi"+side);
         startActivity(intent);
+        */
     }
 
     private void KinTremor2(String userID, String side)
     {
+        Intent intent = new Intent(this,AccGraph.class);
+        intent.putExtra("Path", pathData + File.separator + "ACC");
+        intent.putExtra("ID",userID);
+        intent.putExtra("Task","KinTremor2"+side);
+        startActivity(intent);
+        /*
         if( !userID.equals("") ) userID+="_";
         //tasktext.setText("Rigidity Left");
         Intent intent = new Intent(this,Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData+File.separator+"ACC");
         intent.putExtra("Button", userID+"KinTremor2"+side);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
 
@@ -285,38 +318,26 @@ public class MainActivity extends AppCompatActivity{
     }
     private  void Rigidity(String userID, String side)
     {
+        Intent intent = new Intent(this,AccGraph.class);
+        intent.putExtra("Path", pathData + File.separator + "ACC");
+        intent.putExtra("ID",userID);
+        intent.putExtra("Task","Rigidity"+side);
+        startActivity(intent);
+        /*
         if( !userID.equals("") ) userID+="_";
         Intent intent = new Intent(this, Timer.class);
         intent.putExtra(EXTRA_MESSAGE, pathData + File.separator + "ACC");
         intent.putExtra("Button", userID+"Rigidity"+side);
         startActivity(intent);
+        */
     }
 
     private void Gait(String userID){
-        if( !userID.equals("") ) userID+="_";
         Intent intent = new Intent(this,AccGraph.class);
         intent.putExtra("Path", pathData + File.separator + "ACC");
-        intent.putExtra("Task", userID+"Gait");
+        intent.putExtra("ID",userID);
+        intent.putExtra("Task","Gait");
         startActivity(intent);
-       /*
-        if( !userID.equals("") ) userID+="_";
-        Button pb = (Button) findViewById(R.id.main_gait);
-        rectimergait.setBase(SystemClock.elapsedRealtime());
-        gaitflag = !gaitflag;
-        if (gaitflag) {
-            pb.setText("Stop");
-            rectimergait.start();
-            acc.startAcc(pathData+File.separator+"ACC",userID+"Gait");
-
-
-        } else {
-            pb.setText("Start");
-            rectimergait.stop();
-            rectimergait.setBase(SystemClock.elapsedRealtime());
-                acc.stopAcc();
-
-        }
-        */
     }
 /*
     public void onCheckboxClicked(View view) {
